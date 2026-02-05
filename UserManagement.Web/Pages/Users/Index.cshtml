@@ -1,0 +1,33 @@
+﻿@page
+@model UserManagement.Web.Pages.Users.IndexModel
+
+<h1>Users</h1>
+
+<a class="btn btn-primary" asp-page="/Users/Create">Add User</a>
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Email</th>
+            <th>Groups</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Surname</td>
+                <td>@user.Email</td>
+                <td>@string.Join(", ", user.Groups.Select(g => g.Name))</td>
+                <td>
+                    <a asp-page="/Users/Edit" asp-route-id="@user.Id">Edit</a> |
+                    <a asp-page="/Users/Delete" asp-route-id="@user.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

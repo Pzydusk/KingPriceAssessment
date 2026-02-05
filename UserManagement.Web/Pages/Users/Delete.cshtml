@@ -1,0 +1,37 @@
+﻿@page "{id:guid}"
+@model UserManagement.Web.Pages.Users.DeleteModel
+
+<h1>Delete User</h1>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
+}
+
+<div class="alert alert-warning mt-3">
+    <strong>Are you sure?</strong> This will permanently delete the user.
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">@Model.User.Name</dd>
+
+            <dt class="col-sm-3">Surname</dt>
+            <dd class="col-sm-9">@Model.User.Surname</dd>
+
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@Model.User.Email</dd>
+
+            <dt class="col-sm-3">Groups</dt>
+            <dd class="col-sm-9">@string.Join(", ", Model.User.Groups.Select(g => g.Name))</dd>
+        </dl>
+
+        <form method="post">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a asp-page="/Users/Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>

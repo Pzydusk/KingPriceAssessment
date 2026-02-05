@@ -1,0 +1,51 @@
+﻿@page
+@model UserManagement.Web.Pages.Reports.IndexModel
+
+<h1>Reports</h1>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error:</strong> @Model.ErrorMessage
+    </div>
+}
+else
+{
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Total Users</h5>
+            <p class="display-6">@Model.TotalUsers</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Users Per Group</h5>
+
+            @if (Model.UsersPerGroup.Count == 0)
+            {
+                <p class="text-muted">No groups found.</p>
+            }
+            else
+            {
+                <table class="table table-striped mt-3">
+                    <thead>
+                        <tr>
+                            <th>Group</th>
+                            <th>User Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var row in Model.UsersPerGroup)
+                    {
+                        <tr>
+                            <td>@row.GroupName</td>
+                            <td>@row.UserCount</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+}
